@@ -25,5 +25,10 @@ public class CustomerService {
 		customerRepo.save(customer);
 		return "New User Added Successfully";
 	}
+	
+	public Customer login(String email,String password) {
+		Customer cust=customerRepo.findByEmail(email);
+		if(cust !=null) {}
+	}
 
 }
