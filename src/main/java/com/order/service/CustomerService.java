@@ -34,7 +34,9 @@ public class CustomerService {
 	public Customer login(String email,String password) {
 		Customer cust=customerRepo.findByEmail(email);
 		if(cust !=null) {
-
+			if (passwordEncoder.matches(password, cust.getEncodedPassword())) {
+				return cust;
+			}
 		}
 		return null;
 	}

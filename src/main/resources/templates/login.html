@@ -40,7 +40,7 @@
 						<h3 class="text-center">Login Form</h3>
 					</div>
 					<div class="card-body">
-						<form method="post" th:action="@{/ui/auth/login}">
+						<form method="post" th:action="@{/CCA/auth/login}">
 							<div class="mb-3">
 								<label for="username" class="control-label">Email *</label> <input
 									type="text" name="email" class="form-control"
@@ -55,7 +55,7 @@
 
 							<div class="mb-3">
 								<button type="submit" class="btn btn-primary">Login</button>
-								<span> Not registered? <a th:href="@{/register}">
+								<span> Not registered? <a th:href="@{/order/signup}">
 										Register/SignUp Here</a>
 								</span>
 							</div>
