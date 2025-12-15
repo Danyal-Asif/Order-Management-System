@@ -42,13 +42,14 @@ public void setEmail(String email) {
 	this.email = email;
 }
 
-public String getPassword() {
+public String getEncodedPassword() {
 	return password;
 }
 
-public void setPassword(String password) {
-	this.password = password;
+public void setEncodedPassword(String encodedPassword) {
+    this.password = encodedPassword;
 }
+
 
 
 }
