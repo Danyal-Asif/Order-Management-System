@@ -35,7 +35,7 @@ public class AuthController {
 			return "login-failure";
 		}
 		else{
-			model.addAttribute("message","Welcome "+cust.getName()+" 😎");
+			model.addAttribute("message","Welcome, "+cust.getName()+" 😎");
 			List<ProductDTO> products = productService.getAllProducts().stream()
 			.map(p -> new ProductDTO(p.getName(), p.getPrice(), p.getInStock(),ProductDTO.category.valueOf(p.getCategory().name())))
 			.collect(Collectors.toList());

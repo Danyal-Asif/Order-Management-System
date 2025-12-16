@@ -10,19 +10,21 @@
 </head>
 
 <body>
-    <br/>
-    <br/>
+    <br />
+    <br />
     <h2 style="justify-content: center;text-align: center;" th:text="${message}"></h2>
-    <br/>
-    <div>
-        <table class="table table-bordered table-striped">
-            <thead>
+    <br />
+    <div class="container">
+    <div class="card shadow-sm">
+        <div class="card-body">
+        <table class="table table-bordered table-striped table-sm align-middle">
+            <thead class="table-dark">
                 <tr>
-                    <td>Title</td>
-                    <td>Category</td>
-                    <td>Stock</td>
-                    <td>Price</td>
-                    <td>Action</td>
+                    <th style="width: 35%">Title</th>
+                    <th style="width: 15%">Category</th>
+                    <th style="width: 10%" class="text-center">Stock</th>
+                    <th style="width: 10%" class="text-end">Price</th>
+                    <th style="width: 15%" class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,17 +33,26 @@
                 </tr>
                 <tr th:each="product : ${products}">
                     <td th:text="${product.name}"></td>
-                    <td th:text="${product.category}"></td>
-                    <td th:text="${product.inStock > 0? product.inStock : 'Out Of Stock!'}" th:class="${product.inStock > 0 ? 'text-default' : 'text-danger'}">
-                    </td>
-                    <td th:text="${product.price}"></td>
                     <td>
-                        <button type="button" th:disabled="${product.inStock==0}" th:class="${product.inStock &gt;= 1 ? 'btn btn-success' : 'btn btn-default'}">Add to Cart</button>
+                        <span class="badge bg-secondary" th:text="${product.category}"></span>
+                    </td>
+                    <td class="text-center" th:text="${product.inStock > 0 ? product.inStock : 'Out of Stock'}"
+                        th:classappend="${product.inStock > 0 ? ' text-success' : ' text-danger'}">
+                    </td>
+                    <td class="text-end">
+                        $<span th:text="${product.price}"></span>
+                    </td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-sm btn-success" th:disabled="${product.inStock == 0}">
+                            Add to Cart
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+    </div>
+</div>
 
 </body>
 
