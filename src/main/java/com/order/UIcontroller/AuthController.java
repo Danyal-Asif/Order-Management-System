@@ -1,5 +1,8 @@
 package com.order.UIcontroller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.order.dto.ProductDTO;
 import com.order.model.Customer;
 import com.order.service.CustomerService;
+import com.order.service.ProductService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -18,6 +23,9 @@ public class AuthController {
 
 	@Autowired
 	private CustomerService	customerService;
+
+	@Autowired
+	private ProductService productService;
 	
 	@PostMapping("/login")
 	public String loginPage(@RequestParam String email,@RequestParam String password, HttpSession session,Model model) {
@@ -27,8 +35,12 @@ public class AuthController {
 			return "login-failure";
 		}
 		else{
-			model.addAttribute("message","SignUp Failed!");
-			return "Login Successfull!";
+			model.addAttribute("message","Welcome "+cust.getName()+" 😎");
+			List<ProductDTO> products = productService.getAllProducts().stream()
+			.map(p -> new ProductDTO(p.getName(), p.getPrice(), p.getInStock(),ProductDTO.category.valueOf(p.getCategory().name())))
+			.collect(Collectors.toList());
+			model.addAttribute("products",products);
+			return "product-page";
 		}
 	}
 	

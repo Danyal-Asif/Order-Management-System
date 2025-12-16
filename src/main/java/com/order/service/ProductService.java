@@ -24,7 +24,7 @@ public class ProductService {
 	}
 	
 	public String saveProduct(ProductDTO productDto) {
-		Product product=new Product(productDto.getName(),productDto.getPrice(),productDto.isInStock());
+		Product product=new Product(productDto.getName(),productDto.getPrice(),productDto.getInStock(),Product.category.valueOf(productDto.getCategory().name()));
 		productRepo.save(product);
 		return "Product Added Successfully";
 	}
