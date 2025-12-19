@@ -20,21 +20,11 @@ public class Product {
 	public int instock;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "category")
-	private category category;
-
-	public enum category {
-		ELECTRONICS,
-		BOOKS,
-		CLOTHING,
-		FOOD,
-		OTHERS
-	}
-
-
+	private ProductCategory category;
 	public Product() {
 	}
 
-	public Product(String name, double price, int instock,category category) {
+	public Product(String name, double price, int instock,ProductCategory category) {
 		this.name = name;
 		this.price = price;
 		this.instock = instock;
@@ -73,11 +63,11 @@ public class Product {
 		this.instock = instock;
 	}
 
-	public category getCategory() {
+	public ProductCategory getCategory() {
 		return category;
 	}
 
-	public void setCategory(category category) {
+	public void setCategory(ProductCategory category) {
 		this.category = category;
 	}
 

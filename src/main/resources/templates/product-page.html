@@ -12,15 +12,15 @@
 <body>
     <br />
     <br />
-    <h2 style="justify-content: center;text-align: center;" th:text="${message}"></h2>
+    <h2 style="justify-content: center;text-align: center;" th:text="${name}"></h2>
     <br />
     <div class="container">
-        <form th:action="@{/products}" method="get"
+        <form th:action="@{/products/catPd}" method="get"
       class="d-flex align-items-center gap-2 mb-3">
 
     <label class="fw-bold">Filter:</label>
 
-    <select name="category"
+    <select name="pCategory"
             class="form-select form-select-sm w-25">
         <option value="">All Categories</option>
         <option th:each="cat : ${categories}"

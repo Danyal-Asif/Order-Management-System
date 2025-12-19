@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.order.dto.ProductDTO;
 import com.order.model.Customer;
+import com.order.model.Product;
+import com.order.model.ProductCategory;
 import com.order.service.CustomerService;
 import com.order.service.ProductService;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @Controller
 @RequestMapping("/CCA/auth")
@@ -23,9 +27,6 @@ public class AuthController {
 
 	@Autowired
 	private CustomerService	customerService;
-
-	@Autowired
-	private ProductService productService;
 	
 	@PostMapping("/login")
 	public String loginPage(@RequestParam String email,@RequestParam String password, HttpSession session,Model model) {
@@ -35,12 +36,8 @@ public class AuthController {
 			return "login-failure";
 		}
 		else{
-			model.addAttribute("message","Welcome, "+cust.getName()+" 😎");
-			List<ProductDTO> products = productService.getAllProducts().stream()
-			.map(p -> new ProductDTO(p.getName(), p.getPrice(), p.getInStock(),ProductDTO.category.valueOf(p.getCategory().name())))
-			.collect(Collectors.toList());
-			model.addAttribute("products",products);
-			return "product-page";
+			session.setAttribute("LOGGED_IN_USER", cust);
+			return "redirect:/products/catPd";
 		}
 	}
 	
@@ -57,4 +54,5 @@ public class AuthController {
 			return "signup-failure";
 		}
 	}
+
 }

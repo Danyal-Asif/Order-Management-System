@@ -1,22 +1,15 @@
 package com.order.dto;
 
+import com.order.model.ProductCategory;
+
 public class ProductDTO {
 
 	private String name;
 	private double price;
 	private int inStock;
-	private category category;
+	private ProductCategory category;
 
-	public enum category {
-		ELECTRONICS,
-		BOOKS,
-		CLOTHING,
-		FOOD,
-		OTHERS
-	}
-
-
-	public ProductDTO(String name, double price, int inStock,category category) {
+	public ProductDTO(String name, double price, int inStock,ProductCategory category) {
 		this.name = name;
 		this.price = price;
 		this.inStock = inStock;
@@ -47,11 +40,11 @@ public class ProductDTO {
 		this.inStock = inStock;
 	}
 
-	public category getCategory() {
+	public ProductCategory getCategory() {
 		return category;
 	}
 
-	public void setCategory(category category) {
+	public void setCategory(ProductCategory category) {
 		this.category = category;
 	}
 }
