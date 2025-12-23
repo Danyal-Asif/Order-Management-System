@@ -37,6 +37,7 @@
 
     <div class="card shadow-sm">
         <div class="card-body">
+            <form th:action="@{/cart/add}" method="post">
         <table class="table table-bordered table-striped table-sm align-middle">
             <thead class="table-dark">
                 <tr>
@@ -63,13 +64,15 @@
                         $<span th:text="${product.price}"></span>
                     </td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-sm btn-success" th:disabled="${product.inStock == 0}">
+                        <input type="hidden" name="productId" th:value="${product.id}">
+                        <button type="submit" class="btn btn-sm btn-success" th:disabled="${product.inStock == 0}">
                             Add to Cart
                         </button>
                     </td>
                 </tr>
             </tbody>
         </table>
+        </form>
     </div>
     </div>
 </div>

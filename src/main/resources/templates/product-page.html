@@ -37,6 +37,7 @@
 
     <div class="card shadow-sm">
         <div class="card-body">
+            <form th:action="@{/cart/add}" method="post">
         <table class="table table-bordered table-striped table-sm align-middle">
             <thead class="table-dark">
                 <tr>
@@ -52,24 +53,37 @@
                     <td colspan="5">No Products</td>
                 </tr>
                 <tr th:each="product : ${products}">
-                    <td th:text="${product.name}"></td>
-                    <td>
-                        <span class="badge bg-secondary" th:text="${product.category}"></span>
-                    </td>
-                    <td class="text-center" th:text="${product.inStock > 0 ? product.inStock : 'Out of Stock'}"
-                        th:classappend="${product.inStock > 0 ? ' text-success' : ' text-danger'}">
-                    </td>
-                    <td class="text-end">
-                        $<span th:text="${product.price}"></span>
-                    </td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-sm btn-success" th:disabled="${product.inStock == 0}">
-                            Add to Cart
-                        </button>
-                    </td>
-                </tr>
+    <td th:text="${product.name}"></td>
+
+    <td>
+        <span class="badge bg-secondary"
+              th:text="${product.category}"></span>
+    </td>
+
+    <td class="text-center"
+        th:text="${product.inStock > 0 ? product.inStock : 'Out of Stock'}"
+        th:classappend="${product.inStock > 0 ? ' text-success' : ' text-danger'}">
+    </td>
+
+    <td class="text-end">
+        $<span th:text="${product.price}"></span>
+    </td>
+
+    <td class="text-center">
+        <form th:action="@{/cart/add}" method="post">
+            <input type="hidden" name="productId"
+                   th:value="${product.id}" />
+            <button type="submit"
+                    class="btn btn-sm btn-success"
+                    th:disabled="${product.inStock == 0}">
+                Add to Cart
+            </button>
+        </form>
+    </td>
+</tr>
             </tbody>
         </table>
+        </form>
     </div>
     </div>
 </div>

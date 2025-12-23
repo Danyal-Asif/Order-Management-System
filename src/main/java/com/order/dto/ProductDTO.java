@@ -3,17 +3,26 @@ package com.order.dto;
 import com.order.model.ProductCategory;
 
 public class ProductDTO {
-
+	private Long id;
 	private String name;
 	private double price;
 	private int inStock;
 	private ProductCategory category;
 
-	public ProductDTO(String name, double price, int inStock,ProductCategory category) {
+	public ProductDTO(Long id,String name, double price, int inStock,ProductCategory category) {
 		this.name = name;
 		this.price = price;
 		this.inStock = inStock;
 		this.category=category;
+		this.id=id;
+	}
+    
+	public Long getId(){
+		return id;
+	}
+
+	public void setId(Long id){
+		this.id=id;
 	}
 
 	public String getName() {
