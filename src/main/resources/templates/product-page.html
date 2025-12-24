@@ -10,29 +10,33 @@
 </head>
 
 <body>
-    <br />
-    <br />
-    <h2 style="justify-content: center;text-align: center;" th:text="${name}"></h2>
-    <br />
+    <br/>
     <div class="container">
-        <form th:action="@{/products/catPd}" method="get"
-      class="d-flex align-items-center gap-2 mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 style="justify-content: center; text-align: center;" th:text="${name}"></h5>
+        <a th:href="@{/cart/mycart}" class="btn btn-outline-dark btn-sm">
+            🛒 My Cart
+        </a>
+    </div>
 
-    <label class="fw-bold">Filter:</label>
+    <!-- Filter Form -->
+    <form th:action="@{/products/catPd}" method="get"
+          class="d-flex align-items-center gap-2 mb-3">
 
-    <select name="pCategory"
-            class="form-select form-select-sm w-25">
-        <option value="">All Categories</option>
-        <option th:each="cat : ${categories}"
-                th:value="${cat}"
-                th:text="${cat}">
-        </option>
-    </select>
+        <label class="fw-bold mb-0">Filter:</label>
 
-    <button type="submit" class="btn btn-sm btn-primary">
-        Search
-    </button>
-</form>
+        <select name="pCategory" class="form-select form-select-sm w-25">
+            <option value="">All Categories</option>
+            <option th:each="cat : ${categories}"
+                    th:value="${cat}"
+                    th:text="${cat}">
+            </option>
+        </select>
+
+        <button type="submit" class="btn btn-sm btn-primary">
+            Search
+        </button>
+    </form>
 
 
     <div class="card shadow-sm">

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -12,6 +13,8 @@ import com.order.model.Customer;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @Controller
 @RequestMapping("/cart")
@@ -32,5 +35,19 @@ public class CartController {
 
         return "redirect:/products/catPd";
     }
+
+    @GetMapping("/mycart")
+public String showCart(HttpSession session, Model model) {
+    Customer user = (Customer) session.getAttribute("LOGGED_IN_USER");
+    if (user == null) {
+        return "redirect:/login";
+    }
+
+    model.addAttribute("name", user.getName());
+
+    // add cart items here
+    return "cart-page";
+}
+    
     
 }
