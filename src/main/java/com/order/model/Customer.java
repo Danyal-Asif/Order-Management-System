@@ -1,5 +1,7 @@
 package com.order.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,12 +18,14 @@ private String name;
 private String email;
 private String password;
 
+private List<Cart> cart;
 
 public Customer() {}
 
 public Customer(String name, String email) {
 	this.name = name;
 	this.email = email;
+	this.cart=null;
 }
 public Long getId() {
 	return id;
@@ -48,6 +52,14 @@ public String getEncodedPassword() {
 
 public void setEncodedPassword(String encodedPassword) {
     this.password = encodedPassword;
+}
+
+public List<Cart> getCart() {
+	return cart;
+}
+
+public void setCart(List<Cart> cart) {
+	this.cart = cart;
 }
 
 
