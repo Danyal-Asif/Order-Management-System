@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "customer")
@@ -17,7 +18,7 @@ public class Customer {
 private String name;
 private String email;
 private String password;
-
+ @Transient
 private List<Cart> cart;
 
 public Customer() {}

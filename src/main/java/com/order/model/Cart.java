@@ -1,18 +1,28 @@
 package com.order.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Cart {
+    @Id
+    private Long id;
     private String pName;
     private double price;
     private int quantity;
-    private double total;
+    private double totalPrice;
 
     
-    public Cart(String pName, double price, int quantity, double total) {
+    public Cart(Long id,String pName, double price, int quantity, double total) {
+        this.id=id;
         this.pName = pName;
         this.price = price;
         this.quantity = quantity;
-        this.total = total;
+        this.totalPrice = total;
     }
+
+    
+
     public String getpName() {
         return pName;
     }
@@ -31,12 +41,35 @@ public class Cart {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    public double getTotal() {
-        return total;
+    public double getTotalPrice() {
+        return totalPrice;
     }
-    public void setTotal(double total) {
-        this.total = total;
+    public void setTotalPrice(double total) {
+        this.totalPrice = total;
     }
+
+
+
+    public Long getId() {
+        return id;
+    }
+
+
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+   @Override
+public String toString() {
+    return "Cart{" +
+            "id=" + id +
+            ", name='" + pName + '\'' +
+            ", price=" + price +
+            ", quantity=" + quantity +
+            ", totalPrice=" + totalPrice +
+            '}';
+}
 
     
 
