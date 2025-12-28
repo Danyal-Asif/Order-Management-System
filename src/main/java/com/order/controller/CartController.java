@@ -1,6 +1,5 @@
 package com.order.controller;
 
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,8 +19,6 @@ import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 @Controller
 @RequestMapping("/cart")
@@ -75,41 +72,91 @@ public class CartController {
         model.addAttribute("name", user.getName());
         model.addAttribute("cartItems", user.getCart());
 
-        model.addAttribute("newProduct", user.getCart()==null?null:user.getCart().get(user.getCart().size()-1).getpName());
+        model.addAttribute("newProduct",
+                user.getCart() == null ? null : user.getCart().get(user.getCart().size() - 1).getpName());
 
         // add cart items here
         return "cart-page";
     }
+
     @PostMapping("/decrease")
-    public String minusItem(@RequestParam Long productID,HttpSession session,Model model) {
+    public String minusItem(@RequestParam Long productID, HttpSession session, Model model) {
         Customer user = (Customer) session.getAttribute("LOGGED_IN_USER");
-         if (user == null) {
+        if (user == null) {
             return "redirect:/order/login";
         }
-        List<Cart> custCart=user.getCart();
+        List<Cart> custCart = user.getCart();
 
-        Iterator<Cart> iterator=custCart.iterator();
+        Iterator<Cart> iterator = custCart.iterator();
 
-        while(iterator.hasNext()) {
-            Cart c=iterator.next();
+        while (iterator.hasNext()) {
+            Cart c = iterator.next();
             if (c.getId().equals(productID)) {
-                if(c.getQuantity()<=1){
+                if (c.getQuantity() <= 1) {
                     custCart.remove(c);
-                }
-                else{
-                    c.setQuantity(c.getQuantity()-1);
-                    c.setTotalPrice(c.getPrice()*c.getQuantity());
+                } else {
+                    c.setQuantity(c.getQuantity() - 1);
+                    c.setTotalPrice(c.getPrice() * c.getQuantity());
                 }
                 break;
             }
-             
+
         }
-        
+
         model.addAttribute("name", user.getName());
         model.addAttribute("cartItems", user.getCart());
-        
+
         return "cart-page";
     }
-    
 
+    @PostMapping("/increase")
+    public String plusItem(@RequestParam Long productID, HttpSession session, Model model) {
+        Customer user = (Customer) session.getAttribute("LOGGED_IN_USER");
+        if (user == null) {
+            return "redirect:/order/login";
+        }
+        List<Cart> custCart = user.getCart();
+
+        Iterator<Cart> iterator = custCart.iterator();
+
+        while (iterator.hasNext()) {
+            Cart c = iterator.next();
+            if (c.getId().equals(productID)) {
+                c.setQuantity(c.getQuantity() + 1);
+                c.setTotalPrice(c.getPrice() * c.getQuantity());
+                break;
+            }
+
+        }
+
+        model.addAttribute("name", user.getName());
+        model.addAttribute("cartItems", user.getCart());
+
+        return "cart-page";
+    }
+
+    @PostMapping("/remove")
+    public String removeItem(@RequestParam Long productID, HttpSession session, Model model) {
+        Customer user = (Customer) session.getAttribute("LOGGED_IN_USER");
+        if (user == null) {
+            return "redirect:/order/login";
+        }
+        List<Cart> custCart = user.getCart();
+
+        Iterator<Cart> iterator = custCart.iterator();
+
+        while (iterator.hasNext()) {
+            Cart c = iterator.next();
+            if (c.getId().equals(productID)) {
+                    custCart.remove(c);
+                break;
+            }
+
+        }
+
+        model.addAttribute("name", user.getName());
+        model.addAttribute("cartItems", user.getCart());
+
+        return "cart-page";
+    }
 }

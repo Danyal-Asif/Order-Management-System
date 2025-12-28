@@ -88,10 +88,10 @@
 
                             <!-- Remove -->
                             <td class="text-center">
-                                <a th:href="@{/cart/remove(id=${item.id})}"
-                                    class="text-danger text-decoration-none fs-5">
-                                    ×
-                                </a>
+                                <form th:action="@{/cart/remove}" method="post" class="d-inline">
+                                        <input type="hidden" name="productID" th:value="${item.id}" />
+                                        <button type="submit" class="btn btn-danger">X</button>
+                                    </form>
                             </td>
                         </tr>
                     </tbody>
