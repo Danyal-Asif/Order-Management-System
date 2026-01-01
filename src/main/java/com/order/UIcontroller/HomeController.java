@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/")
 public class HomeController {
  @GetMapping("/")
  public String index() {
@@ -19,5 +19,10 @@ public class HomeController {
 	@GetMapping("/login")
 	public String loginPage() {
 		return "login";
+	}
+
+	@GetMapping("/admin")
+	public String adminPage() {
+		return "admin-utility";
 	}
 }

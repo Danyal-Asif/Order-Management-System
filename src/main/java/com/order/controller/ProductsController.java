@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,10 +41,27 @@ public class ProductsController {
 		return productService.getProduct(id);
 	}
 	
-	@PostMapping
-	public void addProduct(@RequestBody ProductDTO pd) {
+	// @PostMapping("/save")
+	// public void addProduct(@RequestBody ProductDTO pd) {
+	// 	productService.saveProduct(pd);
+	// 	System.out.println("*********** Product added Successfully! *************");
+	// }
+
+	@PostMapping("/save")
+	public String addProduct(@ModelAttribute ProductDTO pd) {
+		System.out.println(pd.getName());
+    System.out.println(pd.getCategory());
+    System.out.println(pd.getPrice());
+    System.out.println(pd.getInStock());
 		productService.saveProduct(pd);
 		System.out.println("*********** Product added Successfully! *************");
+		return "redirect:/admin"; 
+	}
+
+	@GetMapping("/add")
+	public String addProductPage(Model model) {
+		model.addAttribute("categories", ProductCategory.values());
+		return "add-product";
 	}
 
 	@GetMapping("/catPd")

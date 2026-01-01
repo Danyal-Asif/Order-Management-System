@@ -71,11 +71,13 @@ public class CartController {
 
         model.addAttribute("name", user.getName());
         model.addAttribute("cartItems", user.getCart());
+        if (user.getCart() == null) {
+            model.addAttribute("newProduct", null);
+        } else {
 
-        model.addAttribute("newProduct",
-                user.getCart() == null ? null : user.getCart().get(user.getCart().size() - 1).getpName());
-
-        // add cart items here
+            model.addAttribute("newProduct",
+                    user.getCart().size() == 0 ? null : user.getCart().get(user.getCart().size() - 1).getpName());
+        }
         return "cart-page";
     }
 
@@ -148,7 +150,7 @@ public class CartController {
         while (iterator.hasNext()) {
             Cart c = iterator.next();
             if (c.getId().equals(productID)) {
-                    custCart.remove(c);
+                custCart.remove(c);
                 break;
             }
 

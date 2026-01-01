@@ -1,5 +1,8 @@
 package com.order.model;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -42,7 +45,7 @@ public class Cart {
         this.quantity = quantity;
     }
     public double getTotalPrice() {
-        return totalPrice;
+        return BigDecimal.valueOf(totalPrice).setScale(2,RoundingMode.HALF_UP).doubleValue();
     }
     public void setTotalPrice(double total) {
         this.totalPrice = total;
