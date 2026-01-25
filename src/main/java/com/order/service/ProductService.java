@@ -33,4 +33,13 @@ public class ProductService {
 	public List<Product> getProductByCategory(ProductCategory category){
 		return productRepo.getProductByCategory(category);
 	}
+
+	public String editProduct(ProductDTO productDTO){
+		Product product=productRepo.findById(productDTO.getId()).orElse(null);
+		product.setName(productDTO.getName());
+		product.setCategory(productDTO.getCategory());
+		product.setInstock(productDTO.getInStock());
+		product.setPrice(productDTO.getPrice());
+		return "Product edited Successfully";
+	}
 }

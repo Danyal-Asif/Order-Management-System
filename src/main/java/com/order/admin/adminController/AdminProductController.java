@@ -1,4 +1,4 @@
-package com.order.controller;
+package com.order.admin.adminController;
 
 import java.util.List;
 
@@ -7,13 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import com.order.dto.ProductDTO;
 import com.order.mapper.ProductMapper;
-import com.order.model.Customer;
 import com.order.model.Product;
 import com.order.model.ProductCategory;
 import com.order.service.ProductService;
@@ -21,45 +20,30 @@ import com.order.service.ProductService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/products")
-public class ProductsController {
+@RequestMapping("/adminUI")
+public class AdminProductController {
 
-	@Autowired
-	ProductService productService;
+    @Autowired
+	ProductService productService; 
 
 	@Autowired
 	ProductMapper productMapper;
 
-	@GetMapping
+    @GetMapping
 	public List<Product> getAllProducts() {
 		return productService.getAllProducts();
 	}
 
-	@GetMapping("/{id}")
-	public Product getProduct(@PathVariable Long id) {
-		return productService.getProduct(id);
-	}
-
-	@PostMapping("/save")
-	public String addProduct(@ModelAttribute ProductDTO pd) {
-		productService.saveProduct(pd);
-		System.out.println("*********** Product added Successfully! *************");
-		return "redirect:/admin";
-	}
-
-	@GetMapping("/add")
-	public String addProductPage(Model model) {
+    @GetMapping("/initEdit")
+	public String initiateEditProduct( Model model){
+		List<Product> products=getAllProducts();
 		model.addAttribute("categories", ProductCategory.values());
-		return "add-product";
+        model.addAttribute("products", products);
+        return "edit-product-List";
 	}
 
-	@GetMapping("/catPd")
-	public String products(@RequestParam(required = false) String pCategory, HttpSession session, Model model) {
-		Customer user = (Customer) session.getAttribute("LOGGED_IN_USER");
-		if (user == null) {
-			return "redirect:/login";
-		}
-		model.addAttribute("name", "Welcome, " + user.getName() + " 😎");
+    @GetMapping("/products/category")
+	public String adminViewByCategory(@RequestParam(required = false) String pCategory, HttpSession session, Model model) {
 		List<Product> products;
 		if (pCategory == null || pCategory.isBlank()) {
 			products = productService.getAllProducts();
@@ -70,7 +54,13 @@ public class ProductsController {
 		model.addAttribute("products", productDTOs);
 		model.addAttribute("categories", ProductCategory.values());
 
-		return "product-page";
+		return "edit-product-List";
 	}
-
+    @PostMapping("/edit")
+	public String editProduct(@ModelAttribute ProductDTO pd) {
+		System.out.println("/products/edit");
+		productService.editProduct(pd);
+		System.out.println("*********** Product updated Successfully! *************");
+		return "redirect:/admin";
+	}
 }
