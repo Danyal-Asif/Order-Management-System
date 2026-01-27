@@ -28,52 +28,51 @@
     </form>
 
 
-     <div class="card shadow-sm">
+    <div class="card shadow-sm">
         <div class="card-body">
-            <form th:action="@{/cart/edit}" method="post">
-                <table class="table table-bordered table-striped table-sm align-middle">
-                    <thead class="table-dark">
-                        <tr>
-                            <th style="width: 35%">Title</th>
-                            <th style="width: 15%">Category</th>
-                            <th style="width: 10%" class="text-center">Stock</th>
-                            <th style="width: 10%" class="text-end">Price</th>
-                            <th style="width: 15%" class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:if="${products.empty}">
-                            <td colspan="5">No Products</td>
-                        </tr>
-                        <tr th:each="product : ${products}">
-                            <td th:text="${product.name}"></td>
 
-                            <td>
-                                <span class="badge bg-secondary" th:text="${product.category}"></span>
-                            </td>
+            <table class="table table-bordered table-striped table-sm align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th style="width: 35%">Title</th>
+                        <th style="width: 15%">Category</th>
+                        <th style="width: 10%" class="text-center">Stock</th>
+                        <th style="width: 10%" class="text-end">Price</th>
+                        <th style="width: 15%" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${products.empty}">
+                        <td colspan="5">No Products</td>
+                    </tr>
+                    <tr th:each="product : ${products}">
+                        <td th:text="${product.name}"></td>
 
-                            <td class="text-center" th:text="${product.inStock > 0 ? product.inStock : 'Out of Stock'}"
-                                th:classappend="${product.inStock > 0 ? ' text-success' : ' text-danger'}">
-                            </td>
+                        <td>
+                            <span class="badge bg-secondary" th:text="${product.category}"></span>
+                        </td>
 
-                            <td class="text-end">
-                                $<span th:text="${product.price}"></span>
-                            </td>
+                        <td class="text-center" th:text="${product.inStock > 0 ? product.inStock : 'Out of Stock'}"
+                            th:classappend="${product.inStock > 0 ? ' text-success' : ' text-danger'}">
+                        </td>
 
-                            <td class="text-center">
-                                <form th:action="@{/products/edit}" method="post">
-                                    <input type="hidden" name="productId" th:value="${product.id}" />
-                                    <button type="submit" class="btn btn-sm btn-success">
-                                        Edit
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
+                        <td class="text-end">
+                            $<span th:text="${product.price}"></span>
+                        </td>
+
+                        <td class="text-center">
+                            <form th:action="@{/adminUI/initEdit}" method="post">
+                                <input type="hidden" name="productId" th:value="${product.id}" />
+                                <button type="submit" class="btn btn-sm btn-success">
+                                    Edit
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </div> 
+    </div>
     </div>
 
 </body>

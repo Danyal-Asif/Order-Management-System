@@ -40,6 +40,7 @@ public class ProductService {
 		product.setCategory(productDTO.getCategory());
 		product.setInstock(productDTO.getInStock());
 		product.setPrice(productDTO.getPrice());
+		productRepo.save(product);
 		return "Product edited Successfully";
 	}
 }

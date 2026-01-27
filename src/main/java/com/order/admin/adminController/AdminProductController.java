@@ -28,18 +28,15 @@ public class AdminProductController {
 
 	@Autowired
 	ProductMapper productMapper;
-
-    @GetMapping
-	public List<Product> getAllProducts() {
-		return productService.getAllProducts();
-	}
-
-    @GetMapping("/initEdit")
-	public String initiateEditProduct( Model model){
-		List<Product> products=getAllProducts();
+	
+    @PostMapping("/initEdit")
+	public String initiateEditProduct(@RequestParam Long productId, Model model){
+		Product product = productService.getProduct(productId);
 		model.addAttribute("categories", ProductCategory.values());
-        model.addAttribute("products", products);
-        return "edit-product-List";
+		model.addAttribute("category", product.getCategory());
+		System.out.println(product.getCategory());
+		model.addAttribute("product", product);
+        return "editProduct";
 	}
 
     @GetMapping("/products/category")
@@ -58,7 +55,6 @@ public class AdminProductController {
 	}
     @PostMapping("/edit")
 	public String editProduct(@ModelAttribute ProductDTO pd) {
-		System.out.println("/products/edit");
 		productService.editProduct(pd);
 		System.out.println("*********** Product updated Successfully! *************");
 		return "redirect:/admin";
