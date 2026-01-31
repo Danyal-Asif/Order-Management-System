@@ -33,7 +33,7 @@
                             <select name="category"
                                     class="form-select"
                                     required>
-                                <option th:value="${category}" th:text="${category}" disabled selected></option>
+                                <option th:value="${category}" style="font-weight: bolder;" th:text="${category}" selected></option>
                                 <option th:each="cat : ${categories}"
                                         th:value="${cat}"
                                         th:text="${cat}">
