@@ -69,8 +69,15 @@ public class CartController {
             return "redirect:/order/login";
         }
 
+        List<Cart> cartItems = user.getCart();
+        double checkoutPrice = 0;
+        for (Cart cart : cartItems) {
+            checkoutPrice += cart.getTotalPrice();
+        }
+
         model.addAttribute("name", user.getName());
         model.addAttribute("cartItems", user.getCart());
+        model.addAttribute("checkoutPrice", checkoutPrice);
         if (user.getCart() == null) {
             model.addAttribute("newProduct", null);
         } else {
@@ -104,6 +111,12 @@ public class CartController {
             }
 
         }
+        List<Cart> cartItems = user.getCart();
+        double checkoutPrice = 0;
+        for (Cart cart : cartItems) {
+            checkoutPrice += cart.getTotalPrice();
+        }
+        model.addAttribute("checkoutPrice", checkoutPrice);
 
         model.addAttribute("name", user.getName());
         model.addAttribute("cartItems", user.getCart());
@@ -130,6 +143,12 @@ public class CartController {
             }
 
         }
+        List<Cart> cartItems = user.getCart();
+        double checkoutPrice = 0;
+        for (Cart cart : cartItems) {
+            checkoutPrice += cart.getTotalPrice();
+        }
+        model.addAttribute("checkoutPrice", checkoutPrice);
 
         model.addAttribute("name", user.getName());
         model.addAttribute("cartItems", user.getCart());
@@ -154,7 +173,13 @@ public class CartController {
                 break;
             }
 
+       }
+       List<Cart> cartItems = user.getCart();
+        double checkoutPrice = 0;
+        for (Cart cart : cartItems) {
+            checkoutPrice += cart.getTotalPrice();
         }
+        model.addAttribute("checkoutPrice", checkoutPrice);
 
         model.addAttribute("name", user.getName());
         model.addAttribute("cartItems", user.getCart());
