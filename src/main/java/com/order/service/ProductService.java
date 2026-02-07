@@ -43,4 +43,8 @@ public class ProductService {
 		productRepo.save(product);
 		return "Product edited Successfully";
 	}
+	
+	public void deleteProduct(Long id){
+		productRepo.deleteById(id);
+	}
 }

@@ -61,12 +61,18 @@
                         </td>
 
                         <td class="text-center">
-                            <form th:action="@{/adminUI/initEdit}" method="post">
-                                <input type="hidden" name="productId" th:value="${product.id}" />
-                                <button type="submit" class="btn btn-sm btn-success">
-                                    Edit
-                                </button>
-                            </form>
+                            <div class="btn-group btn-group-sm">
+    <form th:action="@{/adminUI/initEdit}" method="post">
+        <input type="hidden" name="productId" th:value="${product.id}" />
+        <button type="submit" class="btn btn-outline-success">Edit</button>
+    </form>
+
+    <form th:action="@{/adminUI/deleteProduct}" method="post">
+        <input type="hidden" name="productId" th:value="${product.id}" />
+        <button type="submit" class="btn btn-outline-danger">Delete</button>
+    </form>
+</div>
+
                         </td>
                     </tr>
                 </tbody>

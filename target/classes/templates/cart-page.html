@@ -111,7 +111,7 @@
                     <div class="text-end">
                         <span class="text-muted">Total</span>
                         <h3 class="fw-bold mb-0">
-                            $<span th:text="${checkoutPrice}"></span>
+                            $$<span th:text="${#numbers.formatDecimal(checkoutPrice, 1, 2)}"></span>
                         </h3>
                     </div>
                 </div>

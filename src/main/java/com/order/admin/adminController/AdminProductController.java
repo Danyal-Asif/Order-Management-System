@@ -39,6 +39,17 @@ public class AdminProductController {
         return "editProduct";
 	}
 
+    @PostMapping("/deleteProduct")
+	public String deleteProduct(@RequestParam Long productId, Model model){
+		productService.deleteProduct(productId);
+		List<Product> products=productService.getAllProducts();
+		List<ProductDTO> productDTOs = products.stream().map(productMapper::toDto).toList();
+		model.addAttribute("products", productDTOs);
+		model.addAttribute("categories", ProductCategory.values());
+
+		return "edit-product-List";
+	}
+
     @GetMapping("/products/category")
 	public String adminViewByCategory(@RequestParam(required = false) String pCategory, HttpSession session, Model model) {
 		List<Product> products;
