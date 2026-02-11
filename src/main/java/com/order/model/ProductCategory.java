@@ -5,5 +5,6 @@ public enum ProductCategory {
 		BOOKS,
 		CLOTHING,
 		FOOD,
-		OTHERS
+		OTHERS,
+		SPORTS
 }

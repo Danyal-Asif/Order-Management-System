@@ -71,9 +71,10 @@ public class CartController {
 
         List<Cart> cartItems = user.getCart();
         double checkoutPrice = 0;
+        if(cartItems!=null){
         for (Cart cart : cartItems) {
             checkoutPrice += cart.getTotalPrice();
-        }
+        }}
 
         model.addAttribute("name", user.getName());
         model.addAttribute("cartItems", user.getCart());

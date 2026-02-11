@@ -1,8 +1,5 @@
 package com.order.UIcontroller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,15 +7,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.order.dto.ProductDTO;
 import com.order.model.Customer;
-import com.order.model.Product;
-import com.order.model.ProductCategory;
-import com.order.service.CustomerService;
-import com.order.service.ProductService;
 
+import com.order.service.CustomerService;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
